@@ -75,7 +75,7 @@ details{margin-top:14px}summary{cursor:pointer;font-weight:700}
 <section id="home">
  <div class="panel">
   <div class="row">
-   <div><label for="level">Challenge Level</label><select id="level"></select></div>
+   <div><label for="level">Challenge Level</label><select id="level"><option value="0">Level 0</option><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option></select></div>
    <div><label>Session structure</label><div class="pill">One game per session · Result shown at the end</div></div>
   </div>
   <details>
@@ -122,9 +122,10 @@ details{margin-top:14px}summary{cursor:pointer;font-weight:700}
 <script>
 'use strict';
 const $=id=>document.getElementById(id);
-for(let n=0;n<=8;n++)$('level').add(new Option('Level '+n,n));
+if($('level').options.length===0)for(let n=0;n<=8;n++)$('level').add(new Option('Level '+n,n));
 let level=0,feedback=true,speed=1,current=null,rule={},inh={},planning={};
 const responseWindows=[2000,1800,1600,1500,1400,1300,1200,1100,1000];
+$('level').addEventListener('change',()=>{if(!current)$('sessionPill').textContent='Ready · Level '+$('level').value});
 function settings(){level=Number($('level').value);feedback=$('feedbackSetting').value==='on';speed=Number($('speedSetting').value)}
 function showPage(page){$('home').classList.toggle('hidden',page!=='home');$('game').classList.toggle('hidden',page!=='game');$('report').classList.toggle('hidden',page!=='report')}
 function begin(name,total,instruction){settings();current={name,total,index:0,correct:0,errors:0,commission:0,omission:0,rt:[],trials:[],start:Date.now()};$('sessionPill').textContent=name+' · Level '+level;$('gameTitle').textContent=name;$('instruction').textContent=instruction;$('levelLabel').textContent='Level '+level;$('status').textContent='';$('feedback').textContent='';$('progressBar').style.width='0%';showPage('game')}
@@ -203,7 +204,7 @@ function renderPlanningGrid(withKey){
   else if(planning.visited.includes(p))cls+=' visited';
   html+=`<button class="${cls}" ${wall?'disabled':''} aria-label="Row ${r+1}, column ${c+1}" onclick="movePlanning(${r},${c})">${txt}</button>`;
  }
- html+='</div><div class="choices"><button class="secondary" onclick="movePlanning(${planning.player[0]-1},${planning.player[1]})">↑</button><button class="secondary" onclick="movePlanning(${planning.player[0]},${planning.player[1]-1})">←</button><button class="secondary" onclick="movePlanning(${planning.player[0]+1},${planning.player[1]})">↓</button><button class="secondary" onclick="movePlanning(${planning.player[0]},${planning.player[1]+1})">→</button></div><div class="sub">Moves: ${planning.moves} ${withKey?' · Key: '+(planning.key?'collected':'not collected'):''}</div><div class="note">You can tap any adjacent open square or use the arrow buttons.</div>`;
+ html+=`</div><div class="choices"><button class="secondary" onclick="movePlanning(${planning.player[0]-1},${planning.player[1]})">↑</button><button class="secondary" onclick="movePlanning(${planning.player[0]},${planning.player[1]-1})">←</button><button class="secondary" onclick="movePlanning(${planning.player[0]+1},${planning.player[1]})">↓</button><button class="secondary" onclick="movePlanning(${planning.player[0]},${planning.player[1]+1})">→</button></div><div class="sub">Moves: ${planning.moves} ${withKey?' · Key: '+(planning.key?'collected':'not collected'):''}</div><div class="note">You can tap any adjacent open square or use the arrow buttons.</div>`;
  $('stage').innerHTML=html;
 }
 function movePlanning(r,c){
