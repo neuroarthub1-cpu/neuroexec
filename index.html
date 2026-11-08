@@ -2,214 +2,244 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Module 3 – Executive Function</title>
 <style>
-:root{--bg:#101318;--panel:#1b2029;--panel2:#242b36;--text:#f2f4f7;--muted:#aab3c0;--accent:#62d6b2;--red:#ff7777;--yellow:#ffd166;--line:#343d4a}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.45 Arial,sans-serif}
-button,select{font:inherit}button{border:0;border-radius:10px;padding:12px 16px;background:var(--accent);color:#101915;font-weight:700;cursor:pointer}
-button.secondary{background:var(--panel2);color:var(--text);border:1px solid var(--line)}
-button:disabled{opacity:.4;cursor:not-allowed}
-.app{max-width:980px;margin:auto;padding:18px}.top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:18px}
-h1{font-size:24px;margin:0}h2{font-size:20px;margin:0 0 10px}h3{font-size:17px;margin:0 0 8px}
-.sub{color:var(--muted);font-size:14px}.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px;margin:14px 0}
-.row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}.row>*{flex:1}
+:root{--bg:#10141b;--panel:#1b222d;--panel2:#252f3c;--line:#394657;--text:#f4f6f8;--muted:#aeb9c7;--accent:#62d6b2;--bad:#ff7777;--gold:#ffd166}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.45 Arial,sans-serif;min-height:100vh}
+button,select{font:inherit}
+button{border:0;border-radius:11px;padding:13px 18px;background:var(--accent);color:#102019;font-weight:700;cursor:pointer}
+button:disabled{opacity:.45;cursor:not-allowed}
+button.secondary{background:var(--panel2);border:1px solid var(--line);color:var(--text)}
+button:focus-visible,select:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.app{width:min(1100px,100%);min-height:100vh;margin:auto;padding:14px 20px 24px;display:flex;flex-direction:column}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 auto 12px;width:100%}
+h1{font-size:clamp(20px,3vw,26px);margin:0}
+h2{font-size:clamp(19px,2.4vw,24px);margin:0 0 8px}
+h3{font-size:17px;margin:0 0 8px}
+.sub,.muted{color:var(--muted);font-size:14px}
+.pill{display:inline-block;border:1px solid var(--line);border-radius:99px;padding:6px 11px;color:var(--muted);font-size:13px}
+main{width:100%;flex:1;display:flex;flex-direction:column;justify-content:center}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:clamp(15px,2.4vw,24px);margin:10px 0}
+.row{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.row>*{flex:1;min-width:180px}
 label{display:block;color:var(--muted);font-size:13px;margin-bottom:6px}
-select{width:100%;padding:11px;background:var(--panel2);color:var(--text);border:1px solid var(--line);border-radius:9px}
-.game-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
-.game-card{background:var(--panel2);border:1px solid var(--line);border-radius:13px;padding:16px}
-.game-card p{color:var(--muted);font-size:14px;min-height:58px}
-.hidden{display:none!important}.stage{min-height:240px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;text-align:center}
-.stimulus{font-size:54px;font-weight:800;min-height:80px;display:flex;align-items:center;justify-content:center}
-.choices{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
-.choice{min-width:105px;background:var(--panel2);color:var(--text);border:2px solid var(--line)}
-.choice.correct{border-color:var(--accent)}.choice.wrong{border-color:var(--red)}
-.status{min-height:24px;color:var(--muted);font-weight:700}.pill{display:inline-block;background:var(--panel2);border:1px solid var(--line);padding:6px 10px;border-radius:99px;font-size:13px;color:var(--muted)}
-.progress{height:8px;background:#303744;border-radius:99px;overflow:hidden;margin-top:8px}.progress>div{height:100%;background:var(--accent);width:0}
-.bin{min-width:130px;min-height:74px;border:2px dashed #657182;border-radius:12px;padding:10px;background:var(--panel2);color:var(--text)}
+select{width:100%;background:var(--panel2);color:var(--text);border:1px solid var(--line);border-radius:10px;padding:12px}
+.game-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.game-card{background:var(--panel2);border:1px solid var(--line);border-radius:15px;padding:18px;display:flex;flex-direction:column;min-height:210px}
+.game-card p{color:var(--muted);font-size:14px;flex:1}
+.game-card button{width:100%}
+details{margin-top:14px}summary{cursor:pointer;font-weight:700}
+.hidden{display:none!important}
+.game-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.game-panel{width:100%;max-width:900px;margin:10px auto;padding:clamp(16px,3vw,30px)}
+.game-stage{min-height:clamp(350px,58vh,570px);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:18px}
+.stimulus{font-size:clamp(64px,12vw,112px);font-weight:800;line-height:1.1;min-height:110px;display:flex;align-items:center;justify-content:center}
+.choices{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+.choice{min-width:112px;background:var(--panel2);border:2px solid var(--line);color:var(--text)}
+.choice.correct{border-color:var(--accent)}.choice.wrong{border-color:var(--bad)}
+.progress{height:8px;background:#303b49;border-radius:99px;overflow:hidden;margin-top:10px}
+.progress>div{height:100%;background:var(--accent);width:0;transition:width .15s}
+.status{min-height:24px;font-weight:700;color:var(--muted)}
+.feedback{min-height:22px;color:var(--gold)}
+.rule-bins{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+.bin{min-width:112px;min-height:66px;border:2px dashed #748295;border-radius:12px;padding:10px;background:var(--panel2);color:var(--text)}
 .bin small{display:block;color:var(--muted);font-weight:400}
-.tilegrid{display:grid;grid-template-columns:repeat(4,58px);gap:7px;justify-content:center}
-.tile{width:58px;height:58px;padding:0;border-radius:9px;background:var(--panel2);border:1px solid var(--line);color:var(--text)}
-.tile.wall{background:#0c0f13;border-color:#0c0f13}.tile.player{background:#236a59;color:white}.tile.goal{background:#80652a;color:white}
-.sequence-items{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
-.sequence-item{padding:12px 14px;background:var(--panel2);border:1px solid var(--line);border-radius:10px;min-width:70px}
+.tilegrid{display:grid;grid-template-columns:repeat(5,min(12vw,68px));gap:7px;justify-content:center}
+.tile{width:min(12vw,68px);height:min(12vw,68px);padding:0;border-radius:10px;background:var(--panel2);border:1px solid var(--line);color:var(--text);font-size:12px}
+.tile.wall{background:#0c1016;border-color:#0c1016;cursor:default}
+.tile.player{background:#236a59;color:white;border:2px solid var(--accent)}
+.tile.goal{background:#735b22;color:white}
+.tile.key{background:#735b22;color:white;border:2px solid var(--gold)}
+.tile.visited{outline:1px solid #647487}
+.sequence-items{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.sequence-item{min-width:65px;padding:16px;background:var(--panel2);color:var(--text);border:2px solid var(--line)}
+.sequence-item.selected{border-color:var(--accent);opacity:.6}
 .report-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
-.metric{background:var(--panel2);padding:12px;border-radius:10px}.metric strong{display:block;font-size:22px}
-table{width:100%;border-collapse:collapse}td,th{text-align:left;padding:9px;border-bottom:1px solid var(--line);font-size:14px}
-details summary{cursor:pointer;font-weight:700;color:var(--text)}details{margin-top:12px}
-.note{font-size:12px;color:var(--muted)}.feedback{color:var(--yellow);min-height:22px}
-@media(max-width:600px){.app{padding:12px}.panel{padding:14px}.stimulus{font-size:42px}.tilegrid{grid-template-columns:repeat(4,52px)}.tile{width:52px;height:52px}}
+.metric{background:var(--panel2);padding:14px;border-radius:12px}
+.metric strong{display:block;font-size:25px;margin-top:4px}
+.center{text-align:center}
+.note{font-size:12px;color:var(--muted)}
+@media(max-width:760px){.app{padding:12px}.game-grid{grid-template-columns:1fr}.game-card{min-height:0}.game-stage{min-height:420px}.tilegrid{grid-template-columns:repeat(5, min(15vw,62px))}.tile{width:min(15vw,62px);height:min(15vw,62px)}}
+@media print{body{background:white;color:black}.app{max-width:none}.panel,.metric{background:white;color:black;border:1px solid #bbb}.sub,.muted,.note{color:#444}.game-head button{display:none}}
 </style>
 </head>
 <body>
 <div class="app">
-  <header class="top">
-    <div><h1>Module 3 · Executive Function</h1><div class="sub">Training tasks for cognitive flexibility, response inhibition and planning</div></div>
-    <span class="pill" id="sessionPill">No active session</span>
-  </header>
+<header>
+ <div><h1>Module 3 · Executive Function</h1><div class="sub">Cognitive flexibility · Response inhibition · Planning</div></div>
+ <span class="pill" id="sessionPill">Ready</span>
+</header>
+<main>
+<section id="home">
+ <div class="panel">
+  <div class="row">
+   <div><label for="level">Challenge Level</label><select id="level"></select></div>
+   <div><label>Session structure</label><div class="pill">One game per session · Result shown at the end</div></div>
+  </div>
+  <details>
+   <summary>Advanced Clinical Settings</summary>
+   <div class="row" style="margin-top:14px">
+    <div><label for="feedbackSetting">Feedback mode</label><select id="feedbackSetting"><option value="on">ON – show correct / incorrect feedback</option><option value="off">OFF – no correctness feedback</option></select></div>
+    <div><label for="speedSetting">Inhibition stimulus speed</label><select id="speedSetting"><option value=".5">0.5×</option><option value=".75">0.75×</option><option value="1" selected>1.0×</option><option value="1.25">1.25×</option><option value="1.5">1.5×</option><option value="2">2.0×</option></select></div>
+   </div>
+   <p class="note">The response window is set automatically by Challenge Level. Stimulus speed changes the interval between inhibition trials, not the response window.</p>
+  </details>
+ </div>
+ <div class="game-grid">
+  <article class="game-card"><h2>1. Rule Switch</h2><p>Sort by colour, shape or size. Maintain a rule and adapt when the sorting rule changes. Supports tapping and dragging.</p><button onclick="startRule()">Start Rule Switch</button></article>
+  <article class="game-card"><h2>2. Inhibition Challenge</h2><p>Progress from Go/No-Go to selective inhibition and conflict inhibition. Commission and omission errors are measured separately.</p><button onclick="startInhibition()">Start Inhibition</button></article>
+  <article class="game-card"><h2>3. Planning Challenge</h2><p>Navigate a route, organise a sequence, and complete a multi-step route requiring a key before the exit.</p><button onclick="startPlanning()">Start Planning</button></article>
+ </div>
+</section>
 
-  <section id="home">
-    <div class="panel">
-      <div class="row">
-        <div><label for="level">Challenge Level</label><select id="level"></select></div>
-        <div><label>Session format</label><div class="pill">Separate game sessions · Individual reports</div></div>
-      </div>
-      <details>
-        <summary>Advanced Clinical Settings</summary>
-        <div class="row" style="margin-top:14px">
-          <div><label for="feedbackSetting">Feedback mode</label><select id="feedbackSetting"><option value="on">ON – show correct / incorrect feedback</option><option value="off">OFF – no correctness feedback</option></select></div>
-          <div><label for="speedSetting">Inhibition stimulus speed</label><select id="speedSetting"><option value="0.5">0.5×</option><option value="0.75">0.75×</option><option value="1" selected>1.0×</option><option value="1.25">1.25×</option><option value="1.5">1.5×</option><option value="2">2.0×</option></select></div>
-        </div>
-        <p class="note">Feedback applies to all games. Stimulus speed changes the pace between inhibition trials; the response window remains controlled by Challenge Level.</p>
-      </details>
-    </div>
-    <div class="game-grid">
-      <div class="game-card"><h2>1. Rule Switch</h2><p>Sort by colour, shape or size. Maintain a rule, then shift when the instruction changes. Supports tap and drag-and-drop.</p><button onclick="startRule()">Start Rule Switch</button></div>
-      <div class="game-card"><h2>2. Inhibition Challenge</h2><p>Progress from Go/No-Go to selective inhibition and conflict inhibition. Commission and omission errors are recorded separately.</p><button onclick="startInhibition()">Start Inhibition</button></div>
-      <div class="game-card"><h2>3. Planning Challenge</h2><p>Plan a route, organise a sequence and solve a multi-step objective with increasing constraints.</p><button onclick="startPlanning()">Start Planning</button></div>
-    </div>
-    <div class="panel"><h3>Previous sessions</h3><div id="history" class="sub">No saved sessions yet.</div></div>
-  </section>
+<section id="game" class="hidden">
+ <div class="game-head">
+  <div><h2 id="gameTitle">Game</h2><div class="sub" id="instruction"></div></div>
+  <button class="secondary" onclick="quitGame()">End session</button>
+ </div>
+ <div class="panel game-panel">
+  <div class="row"><span class="pill" id="trialLabel">Trial 0</span><span class="pill" id="levelLabel">Level 0</span><span class="pill" id="taskLabel">Task</span></div>
+  <div class="progress"><div id="progressBar"></div></div>
+  <div id="stage" class="game-stage"></div>
+  <div class="status center" id="status"></div><div class="feedback center" id="feedback"></div>
+ </div>
+</section>
 
-  <section id="game" class="hidden">
-    <div class="top">
-      <div><h2 id="gameTitle">Game</h2><div class="sub" id="instruction"></div></div>
-      <button class="secondary" onclick="quitGame()">End session</button>
-    </div>
-    <div class="panel">
-      <div class="row"><span class="pill" id="trialLabel">Trial 0</span><span class="pill" id="levelLabel">Level 0</span><span class="pill" id="taskLabel">Task</span></div>
-      <div class="progress"><div id="progressBar"></div></div>
-      <div id="stage" class="stage"></div>
-      <div class="status" id="status"></div>
-      <div class="feedback" id="feedback"></div>
-    </div>
-  </section>
-
-  <section id="report" class="hidden">
-    <div class="top"><div><h2 id="reportTitle">Session report</h2><div class="sub" id="reportDate"></div></div><button class="secondary" onclick="goHome()">Home</button></div>
-    <div class="panel"><div class="report-grid" id="metrics"></div></div>
-    <div class="panel"><h3>Performance details</h3><div id="details"></div></div>
-    <div class="row"><button onclick="downloadCSV()">Download CSV</button><button class="secondary" onclick="window.print()">Print / Save PDF</button></div>
-    <p class="note">These are task-performance measures from this session, not standardised diagnostic scores or clinical norms.</p>
-  </section>
+<section id="report" class="hidden">
+ <div class="panel">
+  <div class="center"><h2 id="reportTitle">Session result</h2><div class="sub" id="reportDate"></div></div>
+  <div class="report-grid" id="metrics" style="margin-top:18px"></div>
+  <div style="margin-top:18px"><h3>Session summary</h3><div id="summary" class="sub"></div></div>
+  <div class="center" style="margin-top:22px"><button onclick="goHome()">Return to main menu</button></div>
+ </div>
+ <p class="note center">Results are displayed for this session only. They are not saved or exported. These are task-performance measures, not standardised diagnostic scores.</p>
+</section>
+</main>
 </div>
 
 <script>
+'use strict';
 const $=id=>document.getElementById(id);
-for(let i=0;i<=8;i++) $('level').add(new Option('Level '+i,i));
-let level=0, feedback=true, speed=1, current=null, reportData=null, history=[];
-try{history=JSON.parse(localStorage.getItem('execModule3History')||'[]')}catch(e){history=[]}
-renderHistory();
-
-function settings(){level=Number($('level').value);feedback=$('feedbackSetting').value==='on';speed=Number($('speedSetting').value)}
-function show(which){$('home').classList.toggle('hidden',which!=='home');$('game').classList.toggle('hidden',which!=='game');$('report').classList.toggle('hidden',which!=='report')}
-function begin(name,total,instruction){settings();current={name,total,index:0,correct:0,errors:0,omissions:0,commissions:0,rt:[],trials:[],started:Date.now(),instruction};$('sessionPill').textContent=name+' · Level '+level;$('gameTitle').textContent=name;$('instruction').textContent=instruction;$('levelLabel').textContent='Level '+level;$('trialLabel').textContent='Trial 0 / '+total;$('status').textContent='';$('feedback').textContent='';show('game')}
-function progress(){if(!current)return;$('trialLabel').textContent='Trial '+current.index+' / '+current.total;$('progressBar').style.width=(current.index/current.total*100)+'%'}
-function message(s){$('status').textContent=s}
-function feedbackMsg(s){$('feedback').textContent=feedback?s:''}
-function record(ok,extra={}){if(!current)return;current.trials.push({trial:current.index+1,correct:ok,...extra});if(ok)current.correct++;else current.errors++;if(extra.commission)current.commissions++;if(extra.omission)current.omissions++;if(Number.isFinite(extra.rt))current.rt.push(extra.rt)}
-function nextTrial(){if(!current)return;current.index++;progress();if(current.index>=current.total)finish();}
-
-const shapes=['●','■','▲','◆'];
-const colours=[{name:'red',hex:'#f05d5e'},{name:'blue',hex:'#55a6f7'},{name:'green',hex:'#62d6b2'},{name:'yellow',hex:'#ffd166'}];
-const sizes=['small','medium','large'];
-function makeRuleTrial(i){
- let mode, switchEvery=level<2?99:Math.max(7,12-Math.floor(level/2));
- if(level<=1)mode='colour';else if(level<=3)mode=(Math.floor(i/switchEvery)%2?'shape':'colour');else if(level<=5)mode=(Math.floor(i/switchEvery)%3===0?'size':Math.floor(i/switchEvery)%3===1?'colour':'shape');else mode=['colour','shape','size'][(Math.floor(i/switchEvery)+(level>=7?Math.floor(i/3):0))%3];
- let cue=(level>=2 && i%switchEvery===0 && i>0);
- let colour=colours[Math.floor(Math.random()*colours.length)],shape=shapes[Math.floor(Math.random()*shapes.length)],size=sizes[Math.floor(Math.random()*sizes.length)];
- let value=mode==='colour'?colour.name:mode==='shape'?shape:size;
- return {mode,colour,shape,size,value,cue};
-}
-let ruleState={};
-function startRule(){begin('Rule Switch',24,'Sort each item according to the current rule. The rule is shown above the item. Use either tap selection or drag the item onto a category.');$('taskLabel').textContent='Cognitive flexibility';ruleState={lastMode:'colour'};showRuleTrial()}
-function showRuleTrial(){
- if(!current)return;let t=makeRuleTrial(current.index);ruleState.trial=t;let cats=t.mode==='colour'?colours.map(x=>x.name):t.mode==='shape'?shapes:sizes;
- let label=t.mode==='colour'?'COLOUR':t.mode==='shape'?'SHAPE':'SIZE';
- let html=`<div class="sub">CURRENT RULE</div><h2>${label}</h2><div class="stimulus" id="dragStim" draggable="true" style="color:${t.colour.hex};font-size:${t.size==='small'?34:t.size==='medium'?52:70}px">${t.shape}</div><div class="sub">Choose the matching category</div><div class="choices">`;
- cats.forEach(c=>{let txt=t.mode==='colour'?c:t.mode==='shape'?c:c;html+=`<button class="choice" data-cat="${c}" onclick="answerRule('${c}')">${txt}</button>`});
- html+='</div><div class="sub">You can also drag the item onto a category.</div>';
- $('stage').innerHTML=html;
- const stim=$('dragStim');stim.addEventListener('dragstart',e=>e.dataTransfer.setData('text/plain','drag'));
- document.querySelectorAll('.choice').forEach(b=>{b.addEventListener('dragover',e=>e.preventDefault());b.addEventListener('drop',e=>{e.preventDefault();answerRule(b.dataset.cat)})});
- progress();$('taskLabel').textContent='Rule: '+label;
-}
-function answerRule(cat){if(!current||ruleState.answered)return;ruleState.answered=true;let t=ruleState.trial,ok=cat===t.value;record(ok,{rule:t.mode,response:cat,expected:t.value});feedbackMsg(ok?'Correct':'Incorrect');if(feedback)$('status').textContent=ok?'Correct':'Try the next one';setTimeout(()=>{if(current){ruleState.answered=false;nextTrial();if(current)showRuleTrial()}},feedback?500:150)}
-
+for(let n=0;n<=8;n++)$('level').add(new Option('Level '+n,n));
+let level=0,feedback=true,speed=1,current=null,rule={},inh={},planning={};
 const responseWindows=[2000,1800,1600,1500,1400,1300,1200,1100,1000];
-let inhib={timer:null,answered:false,trialStart:0,trial:null};
-function taskForLevel(i){
- if(level<=2)return 'Go / No-Go';
- if(level<=4)return 'Selective inhibition';
- if(level<=6)return 'Conflict inhibition';
- return i%3===0?'Go / No-Go':i%3===1?'Selective inhibition':'Conflict inhibition';
-}
-function startInhibition(){begin('Inhibition Challenge',30,'Follow the instruction for each stimulus. Respond to Go targets and withhold responses to No-Go targets. The response window adapts to Challenge Level.');$('taskLabel').textContent='Response inhibition';showInhibTrial()}
-function showInhibTrial(){
- if(!current)return;clearTimeout(inhib.timer);inhib.answered=false;
- const task=taskForLevel(current.index),win=responseWindows[level],speedFactor=1/speed;
- let t={task,kind:'go',symbol:'●',instruction:'Tap only when the target rule is met.'};
- if(task==='Go / No-Go'){t.kind=Math.random()<(0.25+level*.025)?'nogo':'go';t.symbol=t.kind==='nogo'?'✕':'●';t.instruction='Tap the circle. Do not tap the X.'}
- else if(task==='Selective inhibition'){let isTarget=Math.random()<.5;t.kind=isTarget?'go':'nogo';let c=isTarget?'#62d6b2':'#ff7777',s=isTarget?'●':'■';t.symbol=`<span style="color:${c}">${s}</span>`;t.instruction='Tap only the GREEN CIRCLE.'}
- else {let congruent=Math.random()<.5;let word=congruent?'GREEN':'RED',ink=congruent?'#62d6b2':'#ff7777';if(level>=6&&Math.random()<.5){word=word==='GREEN'?'RED':'GREEN';ink=ink==='#62d6b2'?'#ff7777':'#62d6b2'}t.kind=ink==='#62d6b2'?'go':'nogo';t.symbol=`<span style="color:${ink}">${word}</span>`;t.instruction='Tap only when the INK COLOUR is GREEN. Ignore the word.'}
- inhib.trial=t;inhib.trialStart=performance.now();
- $('taskLabel').textContent=task;$('stage').innerHTML=`<div class="sub">${t.instruction}</div><div class="stimulus">${t.symbol}</div><button id="respondBtn" onclick="inhibRespond()">TAP / RESPOND</button><div class="sub">Response window: ${win} ms</div>`;
- message('');feedbackMsg('');progress();
- inhib.timer=setTimeout(()=>{if(!inhib.answered)inhibTimeout()},win);
-}
-function inhibRespond(){if(!current||inhib.answered)return;inhib.answered=true;clearTimeout(inhib.timer);let rt=Math.round(performance.now()-inhib.trialStart),ok=inhib.trial.kind==='go';record(ok,{task:inhib.trial.task,kind:inhib.trial.kind,rt:inhib.trial.kind==='go'?rt:undefined,commission:!ok});feedbackMsg(ok?'Correct response':'Response withheld');if(feedback)message(ok?'Correct':'Incorrect – withhold on this stimulus');setTimeout(()=>{if(current){nextTrial();if(current)showInhibTrial()}},feedback?450:100)}
-function inhibTimeout(){if(!current||inhib.answered)return;inhib.answered=true;let ok=inhib.trial.kind==='nogo';record(ok,{task:inhib.trial.task,kind:inhib.trial.kind,omission:!ok});feedbackMsg(ok?'Correct inhibition':'No response');if(feedback)message(ok?'Correct – no response needed':'Missed Go target');setTimeout(()=>{if(current){nextTrial();if(current)showInhibTrial()}},feedback?450:100)}
+function settings(){level=Number($('level').value);feedback=$('feedbackSetting').value==='on';speed=Number($('speedSetting').value)}
+function showPage(page){$('home').classList.toggle('hidden',page!=='home');$('game').classList.toggle('hidden',page!=='game');$('report').classList.toggle('hidden',page!=='report')}
+function begin(name,total,instruction){settings();current={name,total,index:0,correct:0,errors:0,commission:0,omission:0,rt:[],trials:[],start:Date.now()};$('sessionPill').textContent=name+' · Level '+level;$('gameTitle').textContent=name;$('instruction').textContent=instruction;$('levelLabel').textContent='Level '+level;$('status').textContent='';$('feedback').textContent='';$('progressBar').style.width='0%';showPage('game')}
+function updateProgress(){if(!current)return;$('trialLabel').textContent='Trial '+Math.min(current.index+1,current.total)+' / '+current.total;$('progressBar').style.width=(current.index/current.total*100)+'%'}
+function logTrial(ok,extra={}){current.trials.push({correct:ok,...extra});if(ok)current.correct++;else current.errors++;if(extra.commission)current.commission++;if(extra.omission)current.omission++;if(Number.isFinite(extra.rt))current.rt.push(extra.rt)}
+function say(text){$('status').textContent=text}
+function fb(text){$('feedback').textContent=feedback?text:''}
+function finishTrial(){if(!current)return;current.index++;$('progressBar').style.width=(current.index/current.total*100)+'%';if(current.index>=current.total)finish();else updateProgress()}
+function finish(){if(!current)return;clearTimeout(inh.timer);let c=current;let avg=c.rt.length?Math.round(c.rt.reduce((a,b)=>a+b,0)/c.rt.length):null;let accuracy=c.trials.length?Math.round(c.correct/c.trials.length*100):0;$('reportTitle').textContent=c.name+' · Session Result';$('reportDate').textContent='Challenge Level '+level+' · '+Math.round((Date.now()-c.start)/1000)+' seconds';let metrics=[['Accuracy',accuracy+'%'],['Correct',c.correct],['Incorrect',c.errors],['Commission errors',c.commission],['Omission errors',c.omission],['Mean Go reaction time',avg===null?'—':avg+' ms']];$('metrics').innerHTML=metrics.map(x=>`<div class="metric"><span class="sub">${x[0]}</span><strong>${x[1]}</strong></div>`).join('');$('summary').textContent=summaryText(c);current=null;$('sessionPill').textContent='Session complete';showPage('report')}
+function summaryText(c){if(c.name==='Planning Challenge')return planning.summary||'Planning task completed.';if(c.name==='Rule Switch'){let switches=c.trials.filter(t=>t.switched).length;return `Completed ${c.trials.length} sorting trials. Correct responses: ${c.correct}. Rule changes encountered: ${switches}.`;}return `Completed ${c.trials.length} inhibition trials. Commission errors are responses made to No-Go stimuli; omission errors are missed Go responses. Mean reaction time uses correct Go responses only.`}
+function goHome(){clearTimeout(inh.timer);current=null;$('sessionPill').textContent='Ready';showPage('home')}
+function quitGame(){if(confirm('End this session and display the results for the trials completed?'))finish()}
 
-const mazes=[
- [[0,0],[0,1],[0,2],[1,2],[2,2],[2,3],[3,3]],
- [[0,0],[1,0],[2,0],[2,1],[2,2],[3,2],[3,3]],
- [[0,0],[0,1],[1,1],[2,1],[2,2],[2,3],[3,3]]
+// GAME 1 — RULE SWITCH
+const colourSet=[{n:'RED',hex:'#f05d5e'},{n:'BLUE',hex:'#55a6f7'},{n:'GREEN',hex:'#62d6b2'},{n:'YELLOW',hex:'#ffd166'}],shapeSet=['●','■','▲','◆'];
+function startRule(){begin('Rule Switch',24,'Apply the current sorting rule. Tap a category or drag the item onto it.');rule={answered:false,lastMode:'colour'};showRuleTrial()}
+function createRuleTrial(i){
+ let interval=Math.max(5,12-Math.floor(level/2)),mode;
+ if(level<=1)mode='colour';
+ else if(level<=3)mode=Math.floor(i/interval)%2?'shape':'colour';
+ else mode=['colour','shape','size'][Math.floor(i/interval)%3];
+ if(level>=7&&i>0&&i%4===0)mode=mode==='colour'?'shape':'colour';
+ let switched=i>0&&mode!==rule.lastMode;rule.lastMode=mode;
+ let col=colourSet[Math.floor(Math.random()*4)],shape=shapeSet[Math.floor(Math.random()*4)],size=['SMALL','MEDIUM','LARGE'][Math.floor(Math.random()*3)];
+ let answer=mode==='colour'?col.n:mode==='shape'?shape:size;
+ return{mode,col,shape,size,answer,switched};
+}
+function showRuleTrial(){
+ if(!current)return;let t=createRuleTrial(current.index);rule.trial=t;rule.answered=false;
+ let opts=t.mode==='colour'?colourSet.map(x=>x.n):t.mode==='shape'?shapeSet:['SMALL','MEDIUM','LARGE'];
+ let ruleName=t.mode.toUpperCase(),displaySize=t.size==='SMALL'?42:t.size==='MEDIUM'?68:92;
+ $('taskLabel').textContent='Rule: '+ruleName;updateProgress();
+ $('stage').innerHTML=`<div class="sub">SORT BY ${ruleName}</div><div id="dragStim" class="stimulus" draggable="true" style="color:${t.col.hex};font-size:${displaySize}px">${t.shape}</div><div class="sub">Select the matching category</div><div class="rule-bins" id="ruleBins"></div><div class="note">Tap a category, or drag the item onto a category.</div>`;
+ let bins=$('ruleBins');opts.forEach(o=>{let b=document.createElement('button');b.className='bin';b.textContent=o;b.onclick=()=>answerRule(o);b.ondragover=e=>e.preventDefault();b.ondrop=e=>{e.preventDefault();answerRule(o)};bins.appendChild(b)});
+ $('dragStim').ondragstart=e=>e.dataTransfer.setData('text/plain','stimulus');
+}
+function answerRule(choice){if(!current||rule.answered)return;rule.answered=true;let t=rule.trial,ok=choice===t.answer;logTrial(ok,{task:'Rule Switch',rule:t.mode,response:choice,expected:t.answer,switched:t.switched});fb(ok?'Correct':'Incorrect');say(feedback?(ok?'Correct':'Incorrect – next item'):'');setTimeout(()=>{if(current){finishTrial();if(current)showRuleTrial()}},feedback?500:120)}
+
+// GAME 2 — INHIBITION
+function taskForInhibition(i){if(level<=2)return'Go / No-Go';if(level<=4)return'Selective inhibition';if(level<=6)return'Conflict inhibition';return['Go / No-Go','Selective inhibition','Conflict inhibition'][i%3]}
+function startInhibition(){begin('Inhibition Challenge',30,'Follow the instruction for each stimulus. Respond to Go targets and withhold responses to No-Go stimuli.');inh={timer:null,answered:false,trial:null,start:0};showInhibitionTrial()}
+function showInhibitionTrial(){
+ if(!current)return;clearTimeout(inh.timer);inh.answered=false;
+ let task=taskForInhibition(current.index),t={task,kind:'go'};
+ if(task==='Go / No-Go'){t.kind=Math.random()<(0.25+level*.025)?'nogo':'go';t.display=t.kind==='nogo'?'✕':'●';t.instruction='Tap the circle. Do not tap the X.'}
+ else if(task==='Selective inhibition'){let target=Math.random()<.5;t.kind=target?'go':'nogo';t.display=`<span style="color:${target?'#62d6b2':'#ff7777'}">${target?'●':'■'}</span>`;t.instruction='Tap only the GREEN CIRCLE.'}
+ else{let inkGreen=Math.random()<.5,wordGreen=Math.random()<.5;if(level<6)wordGreen=inkGreen;t.kind=inkGreen?'go':'nogo';t.display=`<span style="color:${inkGreen?'#62d6b2':'#ff7777'}">${wordGreen?'GREEN':'RED'}</span>`;t.instruction='Tap only when the INK COLOUR is GREEN. Ignore the word.'}
+ inh.trial=t;inh.start=performance.now();$('taskLabel').textContent=task;updateProgress();
+ $('stage').innerHTML=`<div class="sub">${t.instruction}</div><div class="stimulus">${t.display}</div><button id="respondBtn">TAP / RESPOND</button><div class="sub">Response window: ${responseWindows[level]} ms</div>`;
+ $('respondBtn').onclick=inhibitionRespond;say('');fb('');
+ inh.timer=setTimeout(inhibitionTimeout,responseWindows[level]);
+}
+function inhibitionRespond(){if(!current||inh.answered)return;inh.answered=true;clearTimeout(inh.timer);let rt=Math.round(performance.now()-inh.start),ok=inh.trial.kind==='go';logTrial(ok,{task:inh.trial.task,kind:inh.trial.kind,rt:ok?rt:null,commission:!ok});fb(ok?'Correct response':'Incorrect response');say(feedback?(ok?'Correct':'Do not respond to this stimulus'):'');setTimeout(()=>{if(current){finishTrial();if(current)showInhibitionTrial()}},feedback?430:90)}
+function inhibitionTimeout(){if(!current||inh.answered)return;inh.answered=true;let ok=inh.trial.kind==='nogo';logTrial(ok,{task:inh.trial.task,kind:inh.trial.kind,omission:!ok});fb(ok?'Correct inhibition':'No response');say(feedback?(ok?'Correct – no response needed':'Missed Go target'):'');setTimeout(()=>{if(current){finishTrial();if(current)showInhibitionTrial()}},feedback?430:90)}
+
+// GAME 3 — PLANNING CHALLENGE
+// Route tasks use a 5x5 grid. Every tile is an actual button; walls block movement.
+// The multi-step task requires reaching the key before the exit.
+const routeMaps=[
+ {walls:['0,2','1,2','3,1','3,3'],start:[0,0],goal:[4,4]},
+ {walls:['0,1','1,1','2,3','3,3','4,1'],start:[0,0],goal:[4,4]},
+ {walls:['1,0','1,2','2,2','3,4','4,2'],start:[0,0],goal:[4,4]}
 ];
-let plan={mode:'route',pos:0,path:[],order:[],selected:[]};
-function startPlanning(){begin('Planning Challenge',1,'Complete the planning task. Levels progressively increase the number of steps and constraints.');$('taskLabel').textContent='Planning and problem-solving';showPlanning()}
-function showPlanning(){
- if(!current)return;
- if(level<=2){plan.mode='route';let path=mazes[level%mazes.length];plan.path=path;plan.pos=0;plan.moves=0;renderMaze()}
- else if(level<=5){plan.mode='sequence';let count=3+Math.floor((level-3)/1);let items=['1','2','3','4','5','6'].slice(0,count);plan.order=items.slice().sort(()=>Math.random()-.5);plan.target=items;plan.selected=[];renderSequence()}
- else{plan.mode='multi';plan.pos=0;plan.moves=0;plan.key=false;plan.path=[[0,0],[0,1],[1,1],[1,2],[2,2],[3,2],[3,3]];renderMaze(true)}
-}
-function renderMaze(multi=false){
- let walls=new Set(multi?['0,2','1,0','2,0','2,3']:['0,3','1,1','1,3','3,0']);let player=plan.pos===undefined?plan.path[0]:plan.path[plan.pos];let html='<div class="sub">'+(multi?'Collect the key (gold tile), then reach the exit.':'Move from START to GOAL using the arrow buttons.')+'</div><div class="tilegrid">';
- for(let r=0;r<4;r++)for(let c=0;c<4;c++){let k=r+','+c,cls='tile',txt='';if(walls.has(k))cls+=' wall';if(player[0]===r&&player[1]===c){cls+=' player';txt='YOU'}else if(r===3&&c===3){cls+=' goal';txt='GOAL'}else if(multi&&r===1&&c===2){cls+=' goal';txt='KEY'}html+=`<div class="${cls}">${txt}</div>`}
- html+='</div><div class="choices"><button class="secondary" onclick="mazeMove(-1,0)">↑</button><button class="secondary" onclick="mazeMove(0,-1)">←</button><button class="secondary" onclick="mazeMove(1,0)">↓</button><button class="secondary" onclick="mazeMove(0,1)">→</button></div><div class="sub">Moves: '+plan.moves+'</div>';
+function startPlanning(){begin('Planning Challenge',1,'Complete the planning task. The task changes with Challenge Level.');planning={moves:0,visited:[],selected:[],summary:''};if(level<=2)setupRoute();else if(level<=5)setupSequence();else setupKeyRoute()}
+function setupRoute(){planning.mode='route';let map=routeMaps[level%routeMaps.length];planning.map=map;planning.player=[...map.start];planning.visited=[planning.player.join(',')];renderPlanningGrid(false)}
+function setupKeyRoute(){planning.mode='key';planning.map={walls:['0,2','1,0','2,0','2,3','3,1'],start:[0,0],goal:[4,4],key:[1,3]};planning.player=[0,0];planning.key=false;planning.visited=[ '0,0' ];renderPlanningGrid(true)}
+function renderPlanningGrid(withKey){
+ let m=planning.map,html=`<div class="sub">${withKey?'Plan a route to collect the KEY, then reach the EXIT.':'Plan a route from START to GOAL. Avoid the dark blocked squares.'}</div><div class="tilegrid">`;
+ for(let r=0;r<5;r++)for(let c=0;c<5;c++){
+  let p=r+','+c,wall=m.walls.includes(p),isPlayer=planning.player[0]===r&&planning.player[1]===c,goal=m.goal.join(',')===p,key=withKey&&m.key.join(',')===p;
+  let cls='tile',txt='';
+  if(wall){cls+=' wall';txt='';}
+  else if(isPlayer){cls+=' player';txt='YOU';}
+  else if(key&&!planning.key){cls+=' key';txt='KEY';}
+  else if(goal){cls+=' goal';txt='EXIT';}
+  else if(planning.visited.includes(p))cls+=' visited';
+  html+=`<button class="${cls}" ${wall?'disabled':''} aria-label="Row ${r+1}, column ${c+1}" onclick="movePlanning(${r},${c})">${txt}</button>`;
+ }
+ html+='</div><div class="choices"><button class="secondary" onclick="movePlanning(${planning.player[0]-1},${planning.player[1]})">↑</button><button class="secondary" onclick="movePlanning(${planning.player[0]},${planning.player[1]-1})">←</button><button class="secondary" onclick="movePlanning(${planning.player[0]+1},${planning.player[1]})">↓</button><button class="secondary" onclick="movePlanning(${planning.player[0]},${planning.player[1]+1})">→</button></div><div class="sub">Moves: ${planning.moves} ${withKey?' · Key: '+(planning.key?'collected':'not collected'):''}</div><div class="note">You can tap any adjacent open square or use the arrow buttons.</div>`;
  $('stage').innerHTML=html;
 }
-function mazeMove(dr,dc){
- if(!current)return;let path=plan.path,now=path[plan.pos],next=[now[0]+dr,now[1]+dc];if(next[0]<0||next[0]>3||next[1]<0||next[1]>3)return;
- let multi=plan.mode==='multi',walls=new Set(multi?['0,2','1,0','2,0','2,3']:['0,3','1,1','1,3','3,0']);if(walls.has(next.join(',')))return;
- plan.moves++;plan.pos=path.findIndex(p=>p[0]===next[0]&&p[1]===next[1]);if(plan.pos<0){path.push(next);plan.pos=path.length-1}
- if(multi&&next[0]===1&&next[1]===2)plan.key=true;
- if(next[0]===3&&next[1]===3&&(!multi||plan.key)){finishPlanning(true);return}
- renderMaze(multi);
+function movePlanning(r,c){
+ if(!current||planning.mode==='sequence')return;
+ if(r<0||r>4||c<0||c>4)return;
+ let m=planning.map,distance=Math.abs(r-planning.player[0])+Math.abs(c-planning.player[1]);if(distance!==1)return;
+ let p=r+','+c;if(m.walls.includes(p))return;
+ planning.player=[r,c];planning.moves++;if(!planning.visited.includes(p))planning.visited.push(p);
+ if(planning.mode==='key'&&m.key[0]===r&&m.key[1]===c)planning.key=true;
+ if(r===m.goal[0]&&c===m.goal[1]){
+  if(planning.mode==='key'&&!planning.key){$('status').textContent='Find the key before the exit.';renderPlanningGrid(true);return}
+  planning.summary=planning.mode==='key'?`Completed the key-and-exit route in ${planning.moves} moves. Key collected before reaching the exit.`:`Completed the route in ${planning.moves} moves.`;logTrial(true,{task:planning.mode==='key'?'Key and exit route':'Route planning',moves:planning.moves,keyCollected:planning.key||false});finish();return;
+ }
+ renderPlanningGrid(planning.mode==='key');
 }
-function renderSequence(){
- let html='<div class="sub">Arrange the numbered steps in ascending order. Tap each item in the correct order.</div><div class="sequence-items">';
- plan.order.forEach(n=>html+=`<button class="sequence-item" onclick="chooseSequence('${n}')">${n}</button>`);
- html+='</div><div class="sub">Your sequence: '+(plan.selected.join(' → ')||'—')+'</div>';
- $('stage').innerHTML=html;
+function setupSequence(){
+ planning.mode='sequence';let count=level===3?3:level===4?4:5;
+ let sequence=Array.from({length:count},(_,i)=>i+1);planning.correctOrder=sequence.map(String);
+ planning.displayOrder=sequence.map(String).sort(()=>Math.random()-.5);
+ // Ensure the displayed order is not already correct.
+ if(planning.displayOrder.every((v,i)=>v===planning.correctOrder[i]))planning.displayOrder.reverse();
+ planning.selected=[];
+ $('taskLabel').textContent='Sequence planning';
+ renderSequenceTask();
 }
-function chooseSequence(n){if(!current||plan.selected.includes(n))return;plan.selected.push(n);if(plan.selected.length===plan.target.length){let ok=plan.selected.every((x,i)=>x===plan.target[i]);record(ok,{task:'Sequence planning',steps:plan.selected.join('-')});feedbackMsg(ok?'Sequence completed':'Sequence not in the required order');if(feedback)message(ok?'Correct sequence':'Review the order');setTimeout(()=>finishPlanning(false,ok),feedback?600:150)}else renderSequence()}
-function finishPlanning(route,sequenceOK){if(!current)return;let ok=route?true:!!sequenceOK;record(ok,{task:plan.mode==='multi'?'Multi-step route planning':plan.mode==='route'?'Route planning':'Sequence planning',moves:plan.moves||undefined,keyCollected:plan.key||undefined});finish()}
-
-function finish(){if(!current)return;clearTimeout(inhib.timer);let c=current;let duration=Math.round((Date.now()-c.started)/1000);reportData={name:c.name,level,duration,correct:c.correct,errors:c.errors,commissions:c.commissions,omissions:c.omissions,total:c.trials.length,rt:c.rt.slice(),trials:c.trials,started:new Date(c.started).toLocaleString()};history.unshift({name:c.name,level,correct:c.correct,total:c.trials.length,date:new Date().toLocaleString()});history=history.slice(0,12);localStorage.setItem('execModule3History',JSON.stringify(history));current=null;showReport()}
-function quitGame(){if(!current)return;if(confirm('End this session and generate a report from the trials completed?'))finish()}
-function showReport(){
- $('sessionPill').textContent='Session complete';$('reportTitle').textContent=reportData.name+' · Individual Report';$('reportDate').textContent=reportData.started+' · Level '+reportData.level+' · '+reportData.duration+' seconds';
- let pct=reportData.total?Math.round(reportData.correct/reportData.total*100):0,avg=reportData.rt.length?Math.round(reportData.rt.reduce((a,b)=>a+b,0)/reportData.rt.length):null;
- const vals=[['Accuracy',pct+'%'],['Correct',reportData.correct],['Errors',reportData.errors],['Commission errors',reportData.commissions],['Omission errors',reportData.omissions],['Mean Go reaction time',avg===null?'—':avg+' ms']];
- $('metrics').innerHTML=vals.map(v=>`<div class="metric"><span class="sub">${v[0]}</span><strong>${v[1]}</strong></div>`).join('');
- let rows=reportData.trials.map(t=>`<tr><td>${t.trial}</td><td>${t.task||t.rule||'—'}</td><td>${t.correct?'Correct':'Incorrect'}</td><td>${t.rt??'—'}</td><td>${t.response??t.kind??'—'}</td></tr>`).join('');
- $('details').innerHTML=`<table><thead><tr><th>Trial</th><th>Task / rule</th><th>Outcome</th><th>RT (ms)</th><th>Response</th></tr></thead><tbody>${rows||'<tr><td colspan="5">No completed trials.</td></tr>'}</tbody></table>`;
- show('report');renderHistory();
+function renderSequenceTask(){
+ $('stage').innerHTML=`<div class="sub">Tap the numbers in ascending order, from smallest to largest.</div><div class="sequence-items" id="sequenceChoices"></div><div class="sub">Your sequence: ${planning.selected.join(' → ')||'—'}</div><button class="secondary" onclick="resetSequence()">Reset selection</button>`;
+ planning.displayOrder.forEach(n=>{let b=document.createElement('button');b.className='sequence-item'+(planning.selected.includes(n)?' selected':'');b.textContent=n;b.disabled=planning.selected.includes(n);b.onclick=()=>selectSequence(n);$('sequenceChoices').appendChild(b)});
 }
-function downloadCSV(){if(!reportData)return;let lines=[['Session',reportData.name],['Level',reportData.level],['Date',reportData.started],[],['Trial','Task / Rule','Correct','Reaction time ms','Response','Expected','Commission','Omission']];reportData.trials.forEach(t=>lines.push([t.trial,t.task||t.rule||'',t.correct?'Yes':'No',t.rt??'',t.response??t.kind??'',t.expected??'',t.commission?'Yes':'No',t.omission?'Yes':'No']));let csv=lines.map(r=>r.map(v=>'"'+String(v??'').replaceAll('"','""')+'"').join(',')).join('\n');let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download='Module3_'+reportData.name.replaceAll(' ','_')+'_report.csv';a.click();URL.revokeObjectURL(a.href)}
-function goHome(){current=null;show('home');$('sessionPill').textContent='No active session';renderHistory()}
-function renderHistory(){if(!$('history'))return;$('history').innerHTML=history.length?history.map(h=>`<div style="padding:7px 0;border-bottom:1px solid var(--line)">${h.date} · <b>${h.name}</b> · Level ${h.level} · ${h.correct}/${h.total} correct</div>`).join(''):'No saved sessions yet.'}
+function selectSequence(n){
+ if(!current||planning.selected.includes(n))return;planning.selected.push(n);
+ if(planning.selected.length===planning.correctOrder.length){
+  let ok=planning.selected.every((v,i)=>v===planning.correctOrder[i]);planning.summary=ok?'Completed the number sequence in the correct order.':'Sequence completed with one or more ordering errors.';logTrial(ok,{task:'Sequence planning',sequence:planning.selected.join('-')});fb(ok?'Sequence correct':'Sequence not in the correct order');if(feedback)say(ok?'Correct sequence':'Incorrect sequence');setTimeout(()=>finish(),feedback?650:120);
+ }else renderSequenceTask();
+}
+function resetSequence(){if(!current)return;planning.selected=[];renderSequenceTask()}
 </script>
 </body>
 </html>
